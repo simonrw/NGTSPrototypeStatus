@@ -13,8 +13,4 @@ describe Measurement do
             expect(@m).to have_attribute attr
         end
     end
-
-    it "should have an action object" do
-        expect(@m.action).to be(@action)
-    end
 end
