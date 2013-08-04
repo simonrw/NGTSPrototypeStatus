@@ -1,5 +1,20 @@
 require 'spec_helper'
 
 describe Measurement do
-  pending "add some examples to (or delete) #{__FILE__}"
+    before(:each) do
+        @m = Measurement.new
+        @action = double("action", :measurements => [@m])
+        @night = double("night", :actions => [@action])
+    end
+
+    it "should have the correct attributes" do
+        attrs = [:mjd, :action_id, :sky_background, :humidity, :ambient_temp, :ccd_temp, :fwhm]
+        attrs.each do |attr|
+            expect(@m).to have_attribute attr
+        end
+    end
+
+    it "should have an action object" do
+        expect(@m.action).to be(@action)
+    end
 end
