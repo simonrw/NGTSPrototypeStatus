@@ -2,10 +2,13 @@ require 'spec_helper'
 
 describe "Actions" do
   describe "GET /actions" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
+    it "should show a list of actions" do
+
+        Action.create(:action_id => 100)
+
+
       visit actions_path
-      expect(response.status).to be(200)
+      expect(page).to have_content '100'
     end
   end
 end
