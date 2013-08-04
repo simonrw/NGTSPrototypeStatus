@@ -4,9 +4,9 @@ describe "Actions" do
   describe "GET /actions" do
       before(:each) do
           @date = 2.days.ago
-          n = Night.create(:start_date => @date)
-          n.actions.create(:action_id => 100)
-          n.save
+          @night = Night.create(:start_date => @date)
+          @action = @night.actions.create(:action_id => 100)
+          @night.save
           visit actions_path
       end
 
@@ -18,6 +18,12 @@ describe "Actions" do
           expect(page).to have_content 'View night'
           click_link 'View night'
           expect(page).to have_content @date
+      end
+
+      it "should have a link for the measurements in detail" do
+          expect(page).to have_content 'View measurements'
+          click_link 'View measurements'
+          expect(page).to have_content "Measurements for Action #{@action.action_id}"
       end
   end
 end
