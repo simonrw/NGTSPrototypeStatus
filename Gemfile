@@ -33,6 +33,7 @@ group :doc do
 end
 
 group :development, :test do
+    gem 'spring'
     gem 'rspec'
     gem 'rspec-rails'
     gem 'guard'
