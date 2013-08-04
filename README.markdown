@@ -16,12 +16,14 @@ This app documents the nightly quality plots for the Geneva prototype
 `class Action`
 
 * action_id
+* night_id
 
 * `belongs_to :night`
 * `has_many :measurements`
 
 `class Measurement`
 
+* action_id
 * mjd
 * sky_background
 * humidity
