@@ -11,11 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130804131439) do
+ActiveRecord::Schema.define(version: 20130804151646) do
 
   create_table "actions", force: true do |t|
     t.integer  "action_id"
     t.integer  "night_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "measurements", force: true do |t|
+    t.integer  "action_id"
+    t.float    "mjd"
+    t.float    "sky_background"
+    t.float    "humidity"
+    t.float    "ambient_temp"
+    t.float    "ccd_temp"
+    t.float    "fwhm"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
