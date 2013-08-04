@@ -1,22 +1,30 @@
 class ActionsController < ApplicationController
-  def show
-  end
+    before_filter :get_action, :only => [:show, :update, :edit, :destroy]
+    def show
+    end
 
-  def index
-  end
+    def index
+    end
 
-  def update
-  end
+    def update
+    end
 
-  def edit
-  end
+    def edit
+    end
 
-  def new
-  end
+    def new
+    end
 
-  def create
-  end
+    def create
+    end
 
-  def destroy
-  end
+    def destroy
+    end
+
+    private
+
+    def get_action
+        @action = Action.find(params[:id])
+    end
 end
+
