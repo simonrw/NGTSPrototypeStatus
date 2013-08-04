@@ -10,6 +10,10 @@ describe Action do
     end
 
     it "should belong to a night" do
-        expect(Action.new).to have_attribute(:nights)
+        n = Night.create
+        a = n.actions.create
+        n.save
+
+        expect(a.night.id).to eq(n.id)
     end
 end
