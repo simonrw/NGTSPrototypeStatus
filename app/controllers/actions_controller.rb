@@ -4,6 +4,7 @@ class ActionsController < ApplicationController
     end
 
     def index
+        @actions = Action.all
     end
 
     def update
