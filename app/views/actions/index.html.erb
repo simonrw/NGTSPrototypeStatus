@@ -12,7 +12,10 @@
         <% @actions.each do |action| %>
             <tr>
                 <td><%= action.action_id %></td>
-                <td><%= link_to "View night", action.night %></td>
+                <td>
+                    <%= link_to "View night", action.night %> | 
+                    <%= link_to "View measurements", action_measurements_path(action) %>
+            </td>
             </tr>
         <% end %>
     </tbody>
