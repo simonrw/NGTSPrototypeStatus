@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130804130908) do
+ActiveRecord::Schema.define(version: 20130804131439) do
 
   create_table "actions", force: true do |t|
     t.integer  "action_id"
     t.integer  "night_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "nights", force: true do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
