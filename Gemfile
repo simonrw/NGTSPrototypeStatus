@@ -44,6 +44,7 @@ end
 
 group :development do
     gem 'rack-mini-profiler'
+    gem 'annotate', ">=2.5.0"
 end
 
 # Use ActiveModel has_secure_password
