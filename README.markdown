@@ -4,7 +4,7 @@ This app documents the nightly quality plots for the Geneva prototype
 
 ## Structure
 
-The main class will be the `actions` class, which contains the information about a single action, as this is the unit of work chosen by the consortium. This action will have a series of measurements, but it also belongs to a night object, if the dates of said action are required.
+The main class will be the `observation` class, which contains the information about a single observation, as this is the unit of work chosen by the consortium. This observation will have a series of measurements, but it also belongs to a night object, if the dates of said observation are required.
 
 ## Models 
 
@@ -13,16 +13,16 @@ The main class will be the `actions` class, which contains the information about
 * start_date
 * end_date
 
-* `has_many :actions`
+* `has_many :observations`
 
 Validations
 
 * `validates :start_date, :presence => true
 * `validates :end_date, :presence => true
 
-`class Action`
+`class Observation`
 
-* action_id
+* observation_number
 * night_id
 
 * `belongs_to :night`
@@ -30,7 +30,7 @@ Validations
 
 `class Measurement`
 
-* action_id
+* observation_id
 * mjd
 * sky_background
 * humidity
@@ -38,4 +38,4 @@ Validations
 * ccd_temp
 * fwhm
 
-* `belongs_to :action`
+* `belongs_to :observation`
