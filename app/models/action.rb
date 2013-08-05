@@ -11,7 +11,7 @@
 
 class Action < ActiveRecord::Base
     belongs_to :night
-    has_many :measurements
+    has_many :measurements, :dependent => :destroy
 
     validates :action_id, presence: true, 
         :numericality => { :only_integer => true, :greater_than => 0 }
