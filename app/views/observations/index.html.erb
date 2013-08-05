@@ -1,0 +1,16 @@
+<h2>Observations</h2>
+
+<table border="0">
+    <thead>
+        <tr>
+            <th>Observation id</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @observations.each do |o| %>
+        <tr>
+            <td><%= o.observation_number %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
