@@ -4,12 +4,14 @@
     <thead>
         <tr>
             <th>Observation id</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
     <% @observations.each do |o| %>
         <tr>
             <td><%= o.observation_number %></td>
+            <td><%= link_to "More detail", o %></td>
         </tr>
     <% end %>
     </tbody>
