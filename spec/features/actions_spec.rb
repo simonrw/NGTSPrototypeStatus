@@ -4,7 +4,8 @@ describe "Actions" do
   describe "GET /actions" do
       before(:each) do
           @date = 2.days.ago
-          @night = Night.create(:start_date => @date)
+          @night = Night.create(:start_date => @date,
+                                :end_date => @date + 1)
           @action = @night.actions.create(:action_id => 100)
           @night.save
           visit actions_path
