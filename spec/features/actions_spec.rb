@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Actions" do
   describe "GET /actions" do
       before(:each) do
-          @date = 2.days.ago
+          @date = 3.days.ago
           @night = Night.create(:start_date => @date,
                                 :end_date => @date + 1)
           @action = @night.actions.create(:action_id => 100)
