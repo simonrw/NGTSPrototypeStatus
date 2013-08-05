@@ -8,6 +8,10 @@ class ObservationsController < ApplicationController
       end
   end
 
+  def index
+      @observations = Observation.all
+  end
+
   private
 
   def observation_params
