@@ -23,5 +23,4 @@ describe Action do
     it "should validate the action id" do
         expect { Action.create! }.to raise_error(ActiveRecord::RecordInvalid)
     end
-
 end
