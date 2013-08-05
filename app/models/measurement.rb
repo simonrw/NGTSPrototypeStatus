@@ -15,5 +15,5 @@
 #
 
 class Measurement < ActiveRecord::Base
-    belongs_to :action
+    belongs_to :observation
 end
