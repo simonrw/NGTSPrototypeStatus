@@ -19,3 +19,14 @@ describe "observations index" do
         expect(current_path).to eq(observation_path(@observation))
     end
 end
+
+describe "Observation detail" do
+    before(:each) do
+        @observation = Observation.create(:observation_number => 10101)
+        visit observation_path(@observation)
+    end
+
+    it "should have the observation id visible" do
+        expect(page).to have_content @observation.observation_number
+    end
+end
