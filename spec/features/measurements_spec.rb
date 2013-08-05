@@ -9,6 +9,6 @@ describe "measurements index" do
     end
 
     it "should show the observation number" do
-        expect(page).to have_content "Measurements for observation #{@observation.observation_number}"
+        expect(page).to have_content "Measurements for Observation #{@observation.observation_number}"
     end
 end
