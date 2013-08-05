@@ -1,5 +1,15 @@
 class MeasurementsController < ApplicationController
-    # def index
-    #     @action = Action.find(params[:action_id])
-    # end
+    before_filter :fetch_observation, :only => [:show, :index]
+    def show
+    end
+   
+    def index
+    end
+
+    private
+
+    def fetch_observation
+        puts params
+        @observation = Observation.find(params[:observation_id])
+    end
 end
