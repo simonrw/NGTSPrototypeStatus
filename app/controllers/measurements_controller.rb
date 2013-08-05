@@ -9,7 +9,6 @@ class MeasurementsController < ApplicationController
     private
 
     def fetch_observation
-        puts params
         @observation = Observation.find(params[:observation_id])
     end
 end
