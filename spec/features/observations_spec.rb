@@ -29,4 +29,15 @@ describe "Observation detail" do
     it "should have the observation id visible" do
         expect(page).to have_content @observation.observation_number
     end
+
+    it "should have a link to the measurements" do
+        expect(page).to have_content "Show measurements"
+    end
+
+    it "should go to the measurements list when 'Show measurement' is clicked" do
+        click_link "Show measurements"
+        expect(current_path).to eq(
+            observation_measurements_path(@observation)
+        )
+    end
 end
