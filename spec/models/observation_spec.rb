@@ -13,5 +13,14 @@
 require 'spec_helper'
 
 describe Observation do
-  pending "add some examples to (or delete) #{__FILE__}"
+    it "should have an observation_number" do
+        expect(Observation.new).to have_attribute(:observation_number)
+    end
+
+    it "should have a collection of measurements" do
+        o = Observation.create
+        o.measurements.create
+        o.measurements.create
+        expect(o.measurements.length).to eq(2)
+    end
 end
