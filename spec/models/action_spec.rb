@@ -20,4 +20,8 @@ describe Action do
         expect(Action.new).to have_attribute(:night_id)
     end
 
+    it "should validate the action id" do
+        expect { Action.create! }.to raise_error(ActiveRecord::RecordInvalid)
+    end
+
 end
