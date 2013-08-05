@@ -7,7 +7,7 @@ describe "observations index" do
     end
 
     it "should have a list of observations" do
-        expect(page).to have_content "10101"
+        expect(page).to have_content @observation.observation_number
     end
 
     it "should show a 'More detail' link" do
