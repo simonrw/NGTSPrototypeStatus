@@ -23,4 +23,8 @@ describe Action do
     it "should validate the action id" do
         expect { Action.create! }.to raise_error(ActiveRecord::RecordInvalid)
     end
+
+    it "should fail validation when action_id < 0" do
+        expect { Action.create!(action_id: -100) }.to raise_error(ActiveRecord::RecordInvalid)
+    end
 end
