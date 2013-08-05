@@ -1,7 +1,7 @@
 NGTSPrototypeStatus::Application.routes.draw do
 
     resources :nights
-    resources :actions do
+    resources :observations do
         resources :measurements
     end
   # The priority is based upon order of creation: first created -> highest priority.
