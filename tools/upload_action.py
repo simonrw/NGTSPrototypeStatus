@@ -89,7 +89,7 @@ def extract_from_image(filename):
 def analyse_file(filename):
     print 'Analysing {}'.format(filename)
     header = pyfits.getheader(filename)
-    exptime = header['exposure']
+    exptime = header.get('exposure', None)
     mjd = header.get('mjd', None)
     airmass = header.get('airmass', None)
     tel_ra = header.get('tel_ra', None)
@@ -102,24 +102,20 @@ def analyse_file(filename):
 
     sky, fwhm = extract_from_image(filename)
 
-    try:
-        return {
-            'mjd': mjd,
-            'airmass': airmass,
-            'tel_ra': tel_ra,
-            'tel_dec': tel_dec,
-            'humidity': humidity,
-            'ambient_temp': ambient_temp,
-            'ccd_temp': ccd_temp,
-            'sky_background': sky / exptime,
-            'fwhm': fwhm,
-            'exposure_time': exptime,
-            'moon_distance': moon_dist,
-            'sun_distance': sun_dist,
-            }
-    except TypeError:
-        return {}
-    
+    return {
+        'mjd': mjd,
+        'airmass': airmass,
+        'tel_ra': tel_ra,
+        'tel_dec': tel_dec,
+        'humidity': humidity,
+        'ambient_temp': ambient_temp,
+        'ccd_temp': ccd_temp,
+        'sky_background': sky / exptime if exptime else None,
+        'fwhm': fwhm,
+        'exposure_time': exptime,
+        'moon_distance': moon_dist,
+        'sun_distance': sun_dist,
+        }
 
 def main(args):
     files = [os.path.join(args['<dir>'], f) for f in os.listdir(args['<dir>'])]
