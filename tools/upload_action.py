@@ -23,6 +23,7 @@ Options:
     -h, --help                  Show this help
 '''
 
+import numpy as np
 from docopt import docopt
 import json
 import os
@@ -30,12 +31,56 @@ import pyfits
 import requests
 import subprocess as sp
 import re
+import tempfile
 
 def get_action_id(dirname):
     match = re.search(r'action(?P<id>\d+)_', dirname)
     return int(match.group('id'))
 
+def extract_from_image(filename):
+    print 'Running sextractor'
+    with tempfile.NamedTemporaryFile() as paramfile:
+        with tempfile.NamedTemporaryFile() as convfile:
+            with tempfile.NamedTemporaryFile() as outfile:
+                paramfile.write('NUMBER\n'
+                        'FLAGS\n'
+                        'BACKGROUND\n'
+                        'FWHM_IMAGE\n')
 
+                convfile.write('CONV NORM\n'
+                            '# 3x3 ``all-ground'' convolution mask with FWHM = 2 pixels.\n'
+                            '1 2 1\n'
+                            '2 4 2\n'
+                            '1 2 1\n')
+
+                paramfile.seek(0)
+                convfile.seek(0)
+
+                cmd = ['sex', filename, '-catalog_name', outfile.name,
+                        '-catalog_type', 'FITS_LDAC',
+                        '-parameters_name', paramfile.name,
+                        '-filter_name', convfile.name]
+                sp.check_call(cmd)
+                outfile.seek(0)
+
+                cat_data = pyfits.getdata(outfile.name, 'ldac_objects')
+
+    ind = cat_data['flags'] == 0
+    cat_data = cat_data[ind]
+
+    background = cat_data['background']
+    fwhm = cat_data['fwhm_image']
+
+    ind = (background > 0) & (fwhm > 0)
+    med_sky = np.average(background[ind])
+    med_fwhm = np.average(fwhm[ind])
+
+
+    return (med_sky if med_sky == med_sky else None, 
+            med_fwhm if med_fwhm == med_fwhm else None)
+
+
+    
 
 def analyse_file(filename):
     print 'Analysing {}'.format(filename)
@@ -48,6 +93,8 @@ def analyse_file(filename):
     ambient_temp = header.get('wxtemp', None)
     ccd_temp = header.get('ccdtemp', None)
 
+    sky, fwhm = extract_from_image(filename)
+
     return {
             'mjd': mjd,
             # 'airmass': airmass,
@@ -56,12 +103,14 @@ def analyse_file(filename):
             'humidity': humidity,
             'ambient_temp': ambient_temp,
             'ccd_temp': ccd_temp,
+            'sky_background': sky,
+            'fwhm': fwhm,
             }
     
 
 def main(args):
     files = [os.path.join(args['<dir>'], f) for f in os.listdir(args['<dir>'])]
-    measurement_objects = map(analyse_file, files)
+    measurement_objects = map(analyse_file, files[:2])
 
     headers = {
                 'Content-Type': 'application/json',
