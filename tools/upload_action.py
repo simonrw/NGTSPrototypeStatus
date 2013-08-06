@@ -14,6 +14,9 @@ Information uploaded:
     * airmass
     * tel_ra
     * tel_dec
+    * exposure_time - 
+    * moon_distance - 
+    * sun_distance - 
 
 
 Usage:
@@ -93,20 +96,25 @@ def analyse_file(filename):
     humidity = header.get('wxhumid', None)
     ambient_temp = header.get('wxtemp', None)
     ccd_temp = header.get('ccdtemp', None)
+    moon_dist = header.get('moondist', None)
+    sun_dist = header.get('sundist', None)
 
     sky, fwhm = extract_from_image(filename)
 
     try:
         return {
             'mjd': mjd,
-            # 'airmass': airmass,
-            # 'tel_ra': tel_ra,
-            # 'tel_dec': tel_dec,
+            'airmass': airmass,
+            'tel_ra': tel_ra,
+            'tel_dec': tel_dec,
             'humidity': humidity,
             'ambient_temp': ambient_temp,
             'ccd_temp': ccd_temp,
             'sky_background': sky / exptime,
             'fwhm': fwhm,
+            'exposure_time': exptime,
+            'moon_distance': moon_dist,
+            'sun_distance': sun_dist,
             }
     except TypeError:
         return {}
