@@ -4,11 +4,21 @@
 <thead>
     <tr>
         <th>MJD</th>
+        <th>FWHM</th>
+        <th>Sky background</th>
+        <th>Humidity</th>
+        <th>Ambient temperature</th>
+        <th>CCD temperature</th>
     </tr>
 </thead>
 <% @observation.measurements.each do |m| %>
     <tr>
         <td><%= m.mjd %></td>
+        <td><%= m.fwhm %></td>
+        <td><%= m.sky_background %></td>
+        <td><%= m.humidity %></td>
+        <td><%= m.ambient_temp %></td>
+        <td><%= m.ccd_temp %></td>
     </tr>
     <% end %>
 </table>
