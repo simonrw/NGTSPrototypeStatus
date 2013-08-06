@@ -27,17 +27,17 @@ Options:
     -n, --nfiles <nfiles>       Limit the number of files uploaded
 '''
 
-import numpy as np
 from docopt import docopt
 import json
-import os
-import pyfits
-import requests
-import subprocess as sp
-import re
-import tempfile
 import logging
 import multiprocessing as mp
+import numpy as np
+import os
+import pyfits
+import re
+import requests
+import subprocess as sp
+import tempfile
 
 def get_action_id(dirname):
     match = re.search(r'action(?P<id>\d+)_', dirname)
