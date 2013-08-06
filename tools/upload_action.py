@@ -27,22 +27,26 @@ Options:
     -n, --nfiles <nfiles>       Limit the number of files uploaded
 '''
 
-import numpy as np
 from docopt import docopt
 import json
+import logging
+import multiprocessing as mp
+import numpy as np
 import os
 import pyfits
+import re
 import requests
 import subprocess as sp
-import re
 import tempfile
+
+logger = mp.log_to_stderr(level=logging.INFO)
 
 def get_action_id(dirname):
     match = re.search(r'action(?P<id>\d+)_', dirname)
     return int(match.group('id'))
 
 def extract_from_image(filename):
-    print 'Running sextractor'
+    logger.info('Running sextractor')
     with tempfile.NamedTemporaryFile() as paramfile:
         with tempfile.NamedTemporaryFile() as convfile:
             with tempfile.NamedTemporaryFile() as outfile:
@@ -64,7 +68,7 @@ def extract_from_image(filename):
                         '-catalog_type', 'FITS_LDAC',
                         '-parameters_name', paramfile.name,
                         '-filter_name', convfile.name]
-                sp.check_call(cmd)
+                sp.check_call(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
                 outfile.seek(0)
 
                 cat_data = pyfits.getdata(outfile.name, 'ldac_objects')
@@ -87,7 +91,7 @@ def extract_from_image(filename):
     
 
 def analyse_file(filename):
-    print 'Analysing {}'.format(filename)
+    logger.info('Analysing {}'.format(filename))
     header = pyfits.getheader(filename)
     exptime = header.get('exposure', None)
     mjd = header.get('mjd', None)
@@ -121,11 +125,12 @@ def main(args):
     files = [os.path.join(args['<dir>'], f) for f in os.listdir(args['<dir>'])]
     if args['--nfiles']:
         nfiles = int(args['--nfiles'])
-        print 'Limiting the number of files to {}'.format(nfiles)
+        logger.info('Limiting the number of files to {}'.format(nfiles))
         files = files[:nfiles]
 
 
-    measurement_objects = map(analyse_file, files)
+    pool = mp.Pool()
+    measurement_objects = pool.map(analyse_file, files)
 
     headers = {
                 'Content-Type': 'application/json',
@@ -141,7 +146,7 @@ def main(args):
             headers=headers,
             data=json.dumps(data)
             )
-    print r.ok
+    logging.info(r.ok)
 
 if __name__ == '__main__':
     main(docopt(__doc__))
