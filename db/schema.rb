@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130806215557) do
+ActiveRecord::Schema.define(version: 20130806224454) do
 
   create_table "measurements", force: true do |t|
     t.float    "mjd"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20130806215557) do
     t.float    "moon_distance"
     t.float    "sun_distance"
   end
+
+  add_index "measurements", ["observation_id"], name: "index_measurements_on_observation_id"
 
   create_table "nights", force: true do |t|
     t.datetime "start_date"
