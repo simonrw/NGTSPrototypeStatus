@@ -68,7 +68,7 @@ def extract_from_image(filename):
                         '-catalog_type', 'FITS_LDAC',
                         '-parameters_name', paramfile.name,
                         '-filter_name', convfile.name]
-                sp.check_call(cmd)
+                sp.check_call(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
                 outfile.seek(0)
 
                 cat_data = pyfits.getdata(outfile.name, 'ldac_objects')
