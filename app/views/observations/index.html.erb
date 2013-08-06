@@ -13,7 +13,7 @@
             <td><%= o.observation_number %></td>
             <td>
                 <%= link_to "More detail", o %> | 
-                <%= link_to "Delete observation" %>
+                <%= link_to "Delete observation", o, :method => :delete %>
         </td>
         </tr>
     <% end %>
