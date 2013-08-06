@@ -85,6 +85,7 @@ def extract_from_image(filename):
 def analyse_file(filename):
     print 'Analysing {}'.format(filename)
     header = pyfits.getheader(filename)
+    exptime = header['exposure']
     mjd = header.get('mjd', None)
     airmass = header.get('airmass', None)
     tel_ra = header.get('tel_ra', None)
@@ -95,7 +96,8 @@ def analyse_file(filename):
 
     sky, fwhm = extract_from_image(filename)
 
-    return {
+    try:
+        return {
             'mjd': mjd,
             # 'airmass': airmass,
             # 'tel_ra': tel_ra,
@@ -103,9 +105,11 @@ def analyse_file(filename):
             'humidity': humidity,
             'ambient_temp': ambient_temp,
             'ccd_temp': ccd_temp,
-            'sky_background': sky,
+            'sky_background': sky / exptime,
             'fwhm': fwhm,
             }
+    except TypeError:
+        return {}
     
 
 def main(args):
