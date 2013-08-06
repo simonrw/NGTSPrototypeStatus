@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130805213439) do
+ActiveRecord::Schema.define(version: 20130806215557) do
 
   create_table "actions", force: true do |t|
     t.integer  "action_id"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20130805213439) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "observation_id"
+    t.float    "airmass"
+    t.float    "tel_ra"
+    t.float    "tel_dec"
+    t.float    "exposure_time"
+    t.float    "moon_distance"
+    t.float    "sun_distance"
   end
 
   create_table "nights", force: true do |t|
