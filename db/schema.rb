@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130806224454) do
+ActiveRecord::Schema.define(version: 20130806224617) do
 
   create_table "measurements", force: true do |t|
     t.float    "mjd"
@@ -47,5 +47,7 @@ ActiveRecord::Schema.define(version: 20130806224454) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "observations", ["night_id"], name: "index_observations_on_night_id"
 
 end
