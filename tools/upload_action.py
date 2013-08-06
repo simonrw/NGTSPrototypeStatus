@@ -24,6 +24,7 @@ Usage:
 
 Options:
     -h, --help                  Show this help
+    -n, --nfiles <nfiles>       Limit the number of files uploaded
 '''
 
 import numpy as np
@@ -122,6 +123,12 @@ def analyse_file(filename):
 
 def main(args):
     files = [os.path.join(args['<dir>'], f) for f in os.listdir(args['<dir>'])]
+    if args['--nfiles']:
+        nfiles = int(args['--nfiles'])
+        print 'Limiting the number of files to {}'.format(nfiles)
+        files = files[:nfiles]
+
+
     measurement_objects = map(analyse_file, files)
 
     headers = {
