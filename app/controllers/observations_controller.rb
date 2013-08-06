@@ -1,5 +1,5 @@
 class ObservationsController < ApplicationController
-    before_filter :fetch_observation, :only => [:show, ]
+    before_filter :fetch_observation, :only => [:show, :destroy]
   def create
       @observation = Observation.new(observation_params)
       if @observation.save
@@ -11,6 +11,12 @@ class ObservationsController < ApplicationController
 
   def index
       @observations = Observation.all
+  end
+
+  def destroy
+      @observation.destroy
+      flash[:message] = 'Observation removed'
+      redirect_to observations_path
   end
 
   def show
