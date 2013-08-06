@@ -3,7 +3,7 @@ class ObservationsController < ApplicationController
   def create
       @observation = Observation.new(observation_params)
       if @observation.save
-          redirect_to @observation
+          render :json => @observation
       else
           render :new
       end
@@ -19,7 +19,8 @@ class ObservationsController < ApplicationController
   private
 
   def observation_params
-      params.require("observation").permit(:observation_number)
+      # params.require("observation").permit(:observation_number)
+      params.require(:observation).permit!
   end
 
   def fetch_observation

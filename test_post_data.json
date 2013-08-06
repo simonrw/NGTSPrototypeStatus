@@ -1,0 +1,17 @@
+{
+    "observation": {
+        "observation_number": 10101,
+        "measurements_attributes": [
+            {
+                "mjd": 20392.1
+            },
+        {
+            "mjd": 201
+        }
+        ],
+            "night_attributes": {
+                "start_date": "2013-08-04",
+                "end_date": "2013-08-05"
+            }
+    }
+}

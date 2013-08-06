@@ -1,1 +1,14 @@
 <h2>Measurements for Observation <%= @observation.observation_number %></h2>
+
+<table border="0">
+<thead>
+    <tr>
+        <th>MJD</th>
+    </tr>
+</thead>
+<% @observation.measurements.each do |m| %>
+    <tr>
+        <td><%= m.mjd %></td>
+    </tr>
+    <% end %>
+</table>
