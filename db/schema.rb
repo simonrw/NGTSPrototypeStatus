@@ -13,13 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20130806215557) do
 
-  create_table "actions", force: true do |t|
-    t.integer  "action_id"
-    t.integer  "night_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "measurements", force: true do |t|
     t.float    "mjd"
     t.float    "sky_background"
