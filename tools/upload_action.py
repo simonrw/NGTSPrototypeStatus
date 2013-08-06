@@ -61,7 +61,7 @@ def analyse_file(filename):
 
 def main(args):
     files = [os.path.join(args['<dir>'], f) for f in os.listdir(args['<dir>'])]
-    measurement_objects = map(analyse_file, files[:2])
+    measurement_objects = map(analyse_file, files)
 
     headers = {
                 'Content-Type': 'application/json',
