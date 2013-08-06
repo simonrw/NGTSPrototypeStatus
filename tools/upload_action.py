@@ -126,7 +126,8 @@ def main(args):
         files = files[:nfiles]
 
 
-    measurement_objects = map(analyse_file, files)
+    pool = mp.Pool()
+    measurement_objects = pool.map(analyse_file, files)
 
     headers = {
                 'Content-Type': 'application/json',
