@@ -11,7 +11,10 @@
     <% @observations.each do |o| %>
         <tr>
             <td><%= o.observation_number %></td>
-            <td><%= link_to "More detail", o %></td>
+            <td>
+                <%= link_to "More detail", o %> | 
+                <%= link_to "Delete observation" %>
+        </td>
         </tr>
     <% end %>
     </tbody>
