@@ -36,6 +36,7 @@ import requests
 import subprocess as sp
 import re
 import tempfile
+import logging
 import multiprocessing as mp
 
 def get_action_id(dirname):
