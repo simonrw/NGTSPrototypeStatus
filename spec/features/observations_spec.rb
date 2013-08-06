@@ -22,6 +22,11 @@ describe "observations index" do
     it "should have delete links" do
         expect(page).to have_content "Delete observation"
     end
+
+    it "should delete the observations when the link is clicked" do
+        click_link "Delete observation"
+        expect(page).to have_content "Observation removed"
+    end
 end
 
 describe "Observation detail" do
