@@ -8,7 +8,6 @@ describe ObservationsController do
               :observation_number => 10101
           }
           expect(assigns[:observation]).to_not be_new_record
-          expect(response).to redirect_to(assigns[:observation])
       end
   end
 
