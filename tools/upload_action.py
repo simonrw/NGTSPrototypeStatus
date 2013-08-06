@@ -46,7 +46,7 @@ def get_action_id(dirname):
     return int(match.group('id'))
 
 def extract_from_image(filename):
-    print 'Running sextractor'
+    logger.info('Running sextractor')
     with tempfile.NamedTemporaryFile() as paramfile:
         with tempfile.NamedTemporaryFile() as convfile:
             with tempfile.NamedTemporaryFile() as outfile:
@@ -91,7 +91,7 @@ def extract_from_image(filename):
     
 
 def analyse_file(filename):
-    print 'Analysing {}'.format(filename)
+    logger.info('Analysing {}'.format(filename))
     header = pyfits.getheader(filename)
     exptime = header.get('exposure', None)
     mjd = header.get('mjd', None)
@@ -125,7 +125,7 @@ def main(args):
     files = [os.path.join(args['<dir>'], f) for f in os.listdir(args['<dir>'])]
     if args['--nfiles']:
         nfiles = int(args['--nfiles'])
-        print 'Limiting the number of files to {}'.format(nfiles)
+        logger.info('Limiting the number of files to {}'.format(nfiles))
         files = files[:nfiles]
 
 
@@ -146,7 +146,7 @@ def main(args):
             headers=headers,
             data=json.dumps(data)
             )
-    print r.ok
+    logging.info(r.ok)
 
 if __name__ == '__main__':
     main(docopt(__doc__))
