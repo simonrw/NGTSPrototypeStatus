@@ -18,6 +18,10 @@ describe "observations index" do
         click_link "More detail"
         expect(current_path).to eq(observation_path(@observation))
     end
+
+    it "should have delete links" do
+        expect(page).to have_content "Delete observation"
+    end
 end
 
 describe "Observation detail" do
