@@ -14,13 +14,15 @@ before_fork do |signal, worker|
         Process.kill 'QUIT', Process.pid
     end
 
-    defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+    defined?(ActiveRecord::Base) and 
+        ActiveRecord::Base.connection.disconnect!
 end
 
 after_fork do |signal, worker|
     Signal.trap 'USR2' do
         puts 'Intercepting term signal'
-
-        defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
     end
+
+    defined?(ActiveRecord::Base) and 
+        ActiveRecord::Base.establish_connection
 end
