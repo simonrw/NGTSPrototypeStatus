@@ -9,20 +9,11 @@ GC.respond_to?(:copy_on_write_friendly=) and
 timeout 30
 
 before_fork do |signal, worker|
-    Signal.trap 'USR2' do
-        puts 'Intercepting term signal'
-        Process.kill 'QUIT', Process.pid
-    end
-
     defined?(ActiveRecord::Base) and 
         ActiveRecord::Base.connection.disconnect!
 end
 
 after_fork do |signal, worker|
-    Signal.trap 'USR2' do
-        puts 'Intercepting term signal'
-    end
-
     defined?(ActiveRecord::Base) and 
         ActiveRecord::Base.establish_connection
 end
