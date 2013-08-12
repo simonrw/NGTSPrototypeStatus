@@ -12,7 +12,11 @@
     <%= content_tag :div, msg, class: name %>
 <% end -%>
  
-
+<div id="user_panel">
+    <% if user_signed_in? %>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+    <% end %>
+</div>
 
 <%= yield %>
 

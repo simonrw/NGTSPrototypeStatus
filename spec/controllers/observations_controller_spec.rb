@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe ObservationsController do
+  before(:each) do
+    User.new({ :email => "test@example.com", :password => "pass", :password_confirmation => "pass" }).save(:validate => false)
+    @user = User.first
+    sign_in @user
+  end
 
   describe "POST 'create'" do
       it "creates an observation object when sent a post request" do
