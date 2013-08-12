@@ -1,5 +1,6 @@
 NGTSPrototypeStatus::Application.routes.draw do
 
+  devise_for :users
     resources :nights
     resources :observations do
         resources :measurements
