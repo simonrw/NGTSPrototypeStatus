@@ -61,3 +61,6 @@ gem 'unicorn'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# Use devise for the authentication
+gem 'devise'
