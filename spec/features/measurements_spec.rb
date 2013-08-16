@@ -7,9 +7,6 @@ describe "measurements index" do
         )
         basic_auth
         visit observation_measurements_path(@observation)
-        fill_in "Email", :with => @user.email
-        fill_in "Password", :with => "pass"
-        click_on "Sign in"
     end
 
     it "should show the observation number" do

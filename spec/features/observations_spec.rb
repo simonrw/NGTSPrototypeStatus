@@ -5,9 +5,6 @@ describe "observations index" do
         @observation = Observation.create(:observation_number => 10101)
         basic_auth
         visit observations_path
-        fill_in "Email", :with => @user.email
-        fill_in "Password", :with => "pass"
-        click_on "Sign in"
     end
 
     it "should have a list of observations" do
@@ -38,9 +35,6 @@ describe "Observation detail" do
         @observation = Observation.create(:observation_number => 10101)
         basic_auth
         visit observation_path(@observation)
-        fill_in "Email", :with => @user.email
-        fill_in "Password", :with => "pass"
-        click_on "Sign in"
     end
 
     it "should have the observation id visible" do
