@@ -73,3 +73,5 @@ group :development, :test do
 end
 
 gem "bcrypt-ruby"
+
+gem 'foreman'
