@@ -77,4 +77,4 @@ gem "bcrypt-ruby"
 gem 'foreman'
 
 # Highcharts for plotting
-gem 'highcharts-rails'
+gem 'highcharts-rails', "~> 3.0.0"

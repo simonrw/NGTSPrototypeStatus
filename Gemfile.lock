@@ -193,7 +193,7 @@ DEPENDENCIES
   foreman
   guard
   guard-rspec
-  highcharts-rails
+  highcharts-rails (~> 3.0.0)
   jbuilder (~> 1.2)
   jquery-rails
   pry
