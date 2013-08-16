@@ -146,7 +146,12 @@ def main(args):
             headers=headers,
             data=json.dumps(data)
             )
-    logging.info(r.ok)
+    if r.ok:
+        logger.info('Uploaded successfully')
+    else:
+        logger.error('Could not upload results.\n'
+                'Error message:\n'
+                '{}'.format(r.text))
 
 if __name__ == '__main__':
     main(docopt(__doc__))
