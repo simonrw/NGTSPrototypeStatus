@@ -39,3 +39,4 @@ Icon
 .Trashes
 venv
 bin
+config/user_details.yml
