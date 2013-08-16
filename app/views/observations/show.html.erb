@@ -1,3 +1,10 @@
 <h2>Observation <%= @observation.observation_number %></h2>
 
 <p><%= link_to "Show measurements", observation_measurements_path(@observation) %></p>
+
+<!-- data section -->
+<div id="plot-image" style="width:80%; height=40%;"></div>
+
+<script>
+var plot_data = <%= raw @observation.measurements.to_json %>;
+</script>
