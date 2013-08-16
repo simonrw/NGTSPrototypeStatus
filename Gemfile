@@ -62,5 +62,14 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# Use devise for the authentication
-gem 'devise'
+group :development, :test do
+  gem "pry"
+  gem "pry-rails"
+  gem "rspec"
+  gem "rspec-rails"
+  gem "guard"
+  gem "guard-rspec"
+  gem "capybara"
+end
+
+gem "bcrypt-ruby"

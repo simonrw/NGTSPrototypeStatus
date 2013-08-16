@@ -38,6 +38,7 @@ import re
 import requests
 import subprocess as sp
 import tempfile
+import yaml
 
 logger = mp.log_to_stderr(level=logging.INFO)
 
@@ -128,6 +129,11 @@ def main(args):
         logger.info('Limiting the number of files to {}'.format(nfiles))
         files = files[:nfiles]
 
+    # Handle the authentication
+    with open(os.path.join(os.path.dirname(__file__),
+        '..', 'config', 'user_details.yml')) as infile:
+        user_details = yaml.load(infile)
+
 
     pool = mp.Pool()
     measurement_objects = pool.map(analyse_file, files)
@@ -142,11 +148,18 @@ def main(args):
                     'measurements_attributes': measurement_objects
                     }
                 }
+
     r = requests.post('http://localhost:3000/observations',
             headers=headers,
-            data=json.dumps(data)
+            data=json.dumps(data),
+            auth=(user_details['username'], user_details['password']),
             )
-    logging.info(r.ok)
+    if r.ok:
+        logger.info('Uploaded successfully')
+    else:
+        logger.error('Could not upload results.\n'
+                'Error message:\n'
+                '{}'.format(r.text))
 
 if __name__ == '__main__':
     main(docopt(__doc__))

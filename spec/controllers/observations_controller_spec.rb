@@ -1,12 +1,20 @@
 require 'spec_helper'
 
-describe ObservationsController do
-  before(:each) do
-    User.new({ :email => "test@example.com", :password => "pass", :password_confirmation => "pass" }).save(:validate => false)
-    @user = User.first
-    sign_in @user
+
+# Needs an extra function here in the controller
+def http_login
+    user = USER_DETAILS['username']
+    pw = USER_DETAILS['password']
+    request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Basic.encode_credentials(user,pw)
   end
 
+describe ObservationsController do
+  render_views
+  
+  before(:each) do
+    http_login
+  end
+  
   describe "POST 'create'" do
       it "creates an observation object when sent a post request" do
           post :create, :observation => {

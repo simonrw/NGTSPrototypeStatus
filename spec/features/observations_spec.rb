@@ -3,8 +3,7 @@ require "spec_helper"
 describe "observations index" do
     before(:each) do 
         @observation = Observation.create(:observation_number => 10101)
-        User.new({ :email => "test@example.com", :password => "pass", :password_confirmation => "pass" }).save(:validate => false)
-        @user = User.first
+        basic_auth
         visit observations_path
         fill_in "Email", :with => @user.email
         fill_in "Password", :with => "pass"
@@ -37,8 +36,7 @@ end
 describe "Observation detail" do
     before(:each) do
         @observation = Observation.create(:observation_number => 10101)
-        User.new({ :email => "test@example.com", :password => "pass", :password_confirmation => "pass" }).save(:validate => false)
-        @user = User.first
+        basic_auth
         visit observation_path(@observation)
         fill_in "Email", :with => @user.email
         fill_in "Password", :with => "pass"
