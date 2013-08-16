@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe ObservationsController do
-
   describe "POST 'create'" do
       it "creates an observation object when sent a post request" do
+          basic_auth
           post :create, :observation => {
               :observation_number => 10101
           }
