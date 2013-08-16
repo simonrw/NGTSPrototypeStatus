@@ -41,3 +41,5 @@ venv
 bin
 config/user_details.yml
 public/assets
+config/initializers/secret_token.rb
+.env

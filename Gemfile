@@ -61,3 +61,15 @@ gem 'unicorn'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :development, :test do
+  gem "pry"
+  gem "pry-rails"
+  gem "rspec"
+  gem "rspec-rails"
+  gem "guard"
+  gem "guard-rspec"
+  gem "capybara"
+end
+
+gem "bcrypt-ruby"
