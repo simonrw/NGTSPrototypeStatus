@@ -40,3 +40,4 @@ Icon
 venv
 bin
 config/user_details.yml
+public/assets
