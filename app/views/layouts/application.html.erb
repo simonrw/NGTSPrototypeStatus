@@ -12,6 +12,15 @@
     <%= content_tag :div, msg, class: name %>
 <% end -%>
 
+<div id="nav">
+    <ul>
+        <li><%= link_to 'Home', root_path %></li>
+        <% if @observation %>
+            <li><%= link_to "Observation #{@observation.observation_number}", @observation %></li>
+        <% end %>
+    </ul>
+</div>
+
 <%= yield %>
 
 </body>
