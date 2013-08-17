@@ -20,6 +20,10 @@ class ObservationsController < ApplicationController
   end
 
   def show
+      respond_to do |format|
+          format.html
+          format.json { render json: @observation.measurements }
+      end
   end
 
   private

@@ -3,10 +3,8 @@
 <p><%= link_to "Show measurements", observation_measurements_path(@observation) %></p>
 
 <!-- data section -->
-<div id=plot-images style="width:100%; height=20%;"></div>
-
-<script>
-var plot_data = <%= raw @observation.measurements.to_json %>;
-</script>
+<div id=plot-images style="width:100%; height=20%;" data-observation-id=<%= @observation.id %>>
+    <p id=loading>Loading image</p>
+</div>
 
 <%= javascript_include_tag "observations_plotting"  %>
