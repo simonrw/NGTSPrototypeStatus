@@ -29,14 +29,16 @@ plot_dataset = (plot_data, elem, x, y, xlabel, ylabel) ->
     }
 
 object_url = (id) ->
-    '/observations/' + id + '.json'
+    '/observations/' + id
 
 ready = ->
     # Get the object id
     observation_id = $('div#plot-images').data('observation-id')
 
-    $.get(object_url(observation_id), (json) ->
-        console.log json
+    $.getJSON(object_url(observation_id), (json) ->
+        # First hide the loading image
+        $('#loading').hide()
+
         plot_dataset json, 'fwhm', 'mjd', 'fwhm', 'MJD', 'FWHM'
         plot_dataset json, 'sky-background', 'mjd', 'sky_background', 'MJD', 'Sky background'
         elem = 'ambient'
@@ -80,6 +82,9 @@ ready = ->
                 name: 'Humidity'
             }]
         }
+    ).fail(->
+        $('#loading').text('Failed to load image')
+        console.log('Error occured')
     )
 
 
