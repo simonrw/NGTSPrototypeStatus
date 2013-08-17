@@ -46,7 +46,6 @@ group :development, :test do
 end
 
 group :development do
-    gem 'rack-mini-profiler'
     gem 'annotate', ">=2.5.0"
 end
 
