@@ -10,7 +10,7 @@ class ObservationsController < ApplicationController
   end
 
   def index
-      @observations = Observation.all
+      @observations = Observation.order("observation_number DESC")
   end
 
   def destroy
