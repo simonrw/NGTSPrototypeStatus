@@ -18,3 +18,4 @@ config/initializers/secret_token.rb
 *.swp
 config/user_details.yml
 public/assets
+public/assets
