@@ -8,3 +8,5 @@
 <script>
 var plot_data = <%= raw @observation.measurements.to_json %>;
 </script>
+
+<%= javascript_include_tag "observations_plotting"  %>
