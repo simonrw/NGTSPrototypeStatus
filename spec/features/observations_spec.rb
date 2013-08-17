@@ -3,6 +3,7 @@ require "spec_helper"
 describe "observations index" do
     before(:each) do 
         @observation = Observation.create(:observation_number => 10101)
+        basic_auth
         visit observations_path
     end
 
@@ -32,6 +33,7 @@ end
 describe "Observation detail" do
     before(:each) do
         @observation = Observation.create(:observation_number => 10101)
+        basic_auth
         visit observation_path(@observation)
     end
 

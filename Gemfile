@@ -18,6 +18,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Reduce the chance of BREACH attacks, though this is not really required its good practice
+gem 'breach-mitigation-rails'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -43,7 +46,6 @@ group :development, :test do
 end
 
 group :development do
-    gem 'rack-mini-profiler'
     gem 'annotate', ">=2.5.0"
 end
 
@@ -51,10 +53,27 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :development, :test do
+  gem "pry"
+  gem "pry-rails"
+  gem "rspec"
+  gem "rspec-rails"
+  gem "guard"
+  gem "guard-rspec"
+  gem "capybara"
+end
+
+gem "bcrypt-ruby"
+
+gem 'foreman'
+
+# Highcharts for plotting
+gem 'highcharts-rails', "~> 3.0.0"

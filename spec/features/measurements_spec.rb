@@ -5,6 +5,7 @@ describe "measurements index" do
         @observation = Observation.create(
             :observation_number => 10101
         )
+        basic_auth
         visit observation_measurements_path(@observation)
     end
 

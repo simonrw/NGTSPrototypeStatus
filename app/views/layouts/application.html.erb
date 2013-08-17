@@ -8,11 +8,20 @@
 </head>
 <body>
 
+<a href="/"><img src="/images/ngts_logo.png" alt="" /></a>
+
 <% flash.each do |name, msg| -%>
     <%= content_tag :div, msg, class: name %>
 <% end -%>
- 
 
+<div id="nav">
+    <ul>
+        <li><%= link_to 'Home', root_path %></li>
+        <% if @observation %>
+            <li><%= link_to "Observation #{@observation.observation_number}", @observation %></li>
+        <% end %>
+    </ul>
+</div>
 
 <%= yield %>
 

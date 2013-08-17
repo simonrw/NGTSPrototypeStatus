@@ -41,3 +41,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+
+def basic_auth
+    encoded_login = ["#{USER_DETAILS['username']}:#{USER_DETAILS['password']}"].pack('m*')
+    page.driver.header "Authorization", "Basic #{encoded_login}"
+end
