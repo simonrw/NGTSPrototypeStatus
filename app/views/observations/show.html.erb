@@ -5,8 +5,4 @@
 <!-- data section -->
 <div id=plot-images style="width:100%; height=20%;"></div>
 
-<script>
-var plot_data = <%= raw @observation.measurements.to_json %>;
-</script>
-
 <%= javascript_include_tag "observations_plotting"  %>
