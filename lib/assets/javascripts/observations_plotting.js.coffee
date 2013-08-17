@@ -1,4 +1,4 @@
-plot_dataset = (elem, x, y, xlabel, ylabel) ->
+plot_dataset = (plot_data, elem, x, y, xlabel, ylabel) ->
     jQuery('<div/>', {
         id: elem
         style: 'width:100%; height: 300px;'
@@ -28,50 +28,60 @@ plot_dataset = (elem, x, y, xlabel, ylabel) ->
         }]
     }
 
+object_url = (id) ->
+    '/observations/' + id + '.json'
+
 ready = ->
-    plot_dataset 'fwhm', 'mjd', 'fwhm', 'MJD', 'FWHM'
-    plot_dataset 'sky-background', 'mjd', 'sky_background', 'MJD', 'Sky background'
-    elem = 'ambient'
-    jQuery('<div/>', {
-        id: elem
-        style: 'width:100%; height: 300px;'
-    }).appendTo('#plot-images')
+    # Get the object id
+    observation_id = $('div#plot-images').data('observation-id')
 
-    $('#' + elem).highcharts {
-        chart:
-            type: 'scatter'
-        xAxis:
-            title:
-                text: 'MJD'
-        yAxis: [{
-            title:
-                text: 'Temperature'
-        }, {
-            title:
-                text: 'Humidity'
-            opposite: true
-        }]
+    $.get(object_url(observation_id), (json) ->
+        console.log json
+        plot_dataset json, 'fwhm', 'mjd', 'fwhm', 'MJD', 'FWHM'
+        plot_dataset json, 'sky-background', 'mjd', 'sky_background', 'MJD', 'Sky background'
+        elem = 'ambient'
+        jQuery('<div/>', {
+            id: elem
+            style: 'width:100%; height: 300px;'
+        }).appendTo('#plot-images')
 
-        title:
-            text: null
-        plotOptions:
-            series:
-                allowPointSelect: false
-                enableMouseTracking: false
-        series: [{
-            data: plot_data.map (item) ->
-                [ item['mjd'], item['ambient_temp'] ]
-            animation: false
-            yAxis: 0
-            name: 'Temperature'
-        }, {
-            data: plot_data.map (item) ->
-                [ item['mjd'], item['humidity'] ]
-            animation: false
-            yAxis: 1
-            name: 'Humidity'
-        }]
-    }
+        $('#' + elem).highcharts {
+            chart:
+                type: 'scatter'
+            xAxis:
+                title:
+                    text: 'MJD'
+            yAxis: [{
+                title:
+                    text: 'Temperature'
+            }, {
+                title:
+                    text: 'Humidity'
+                opposite: true
+            }]
+
+            title:
+                text: null
+            plotOptions:
+                series:
+                    allowPointSelect: false
+                    enableMouseTracking: false
+            series: [{
+                data: json.map (item) ->
+                    [ item['mjd'], item['ambient_temp'] ]
+                animation: false
+                yAxis: 0
+                name: 'Temperature'
+            }, {
+                data: json.map (item) ->
+                    [ item['mjd'], item['humidity'] ]
+                animation: false
+                yAxis: 1
+                name: 'Humidity'
+            }]
+        }
+    )
+
 
 
 
