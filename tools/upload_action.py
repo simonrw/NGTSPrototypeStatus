@@ -40,7 +40,7 @@ import subprocess as sp
 import tempfile
 import yaml
 
-logger = mp.log_to_stderr(level=logging.DEBUG)
+logger = mp.log_to_stderr(level=logging.INFO)
 
 def get_action_id(dirname):
     match = re.search(r'action(?P<id>\d+)_', dirname)
