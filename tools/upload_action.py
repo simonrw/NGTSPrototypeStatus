@@ -40,7 +40,7 @@ import subprocess as sp
 import tempfile
 import yaml
 
-logger = mp.log_to_stderr(level=logging.INFO)
+logger = mp.log_to_stderr(level=logging.DEBUG)
 
 def get_action_id(dirname):
     match = re.search(r'action(?P<id>\d+)_', dirname)
@@ -115,7 +115,7 @@ def analyse_file(filename):
         'humidity': humidity,
         'ambient_temp': ambient_temp,
         'ccd_temp': ccd_temp,
-        'sky_background': sky / exptime if exptime else None,
+        'sky_background': sky / exptime if (exptime and sky) else None,
         'fwhm': fwhm,
         'exposure_time': exptime,
         'moon_distance': moon_dist,
