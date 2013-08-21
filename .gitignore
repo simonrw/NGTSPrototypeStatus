@@ -19,3 +19,4 @@ config/initializers/secret_token.rb
 config/user_details.yml
 public/assets
 public/assets
+vendor/cache
