@@ -18,7 +18,7 @@ describe Observation do
     end
 
     it "should have a collection of measurements" do
-        o = Observation.create
+        o = Observation.create(observation_number: 1)
         o.measurements.create
         o.measurements.create
         expect(o.measurements.length).to eq(2)
