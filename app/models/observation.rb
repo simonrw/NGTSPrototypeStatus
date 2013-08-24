@@ -14,4 +14,5 @@ class Observation < ActiveRecord::Base
     belongs_to :night
     has_many :measurements, :dependent => :destroy
     accepts_nested_attributes_for :measurements, :night
+    validates_presence_of :observation_number
 end
