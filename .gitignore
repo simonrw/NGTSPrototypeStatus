@@ -20,3 +20,4 @@ config/user_details.yml
 public/assets
 public/assets
 vendor/cache
+.powenv
