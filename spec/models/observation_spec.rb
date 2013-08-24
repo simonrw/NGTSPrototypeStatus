@@ -23,4 +23,8 @@ describe Observation do
         o.measurements.create
         expect(o.measurements.length).to eq(2)
     end
+
+    it "should fail to save without an observation number" do
+        expect{ Observation.create! }.to raise_error
+    end
 end
