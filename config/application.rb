@@ -22,5 +22,8 @@ module NGTSPrototypeStatus
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
       config.action_controller.allow_forgery_protection = false
+
+      # Use authentication by default
+      config.perform_authentication = true
   end
 end
