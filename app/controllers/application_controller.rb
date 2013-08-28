@@ -9,7 +9,9 @@ private
 
   def authenticate
     if Rails.configuration.perform_authentication
-      http_basic_authenticate_with name: USER_DETAILS["username"], password: USER_DETAILS["password"]
+      authenticate_or_request_with_http_basic do |username, password|
+        username == USER_DETAILS["username"] && password == USER_DETAILS["password"]
+      end
     end
   end
 end
