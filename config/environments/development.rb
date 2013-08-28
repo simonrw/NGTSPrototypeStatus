@@ -30,5 +30,7 @@ NGTSPrototypeStatus::Application.configure do
   # Devise requires this for the mailer settings
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  config.perform_authentication = false
+
 end
 STDOUT.sync = true
