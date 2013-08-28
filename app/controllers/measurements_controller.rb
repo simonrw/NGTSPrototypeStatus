@@ -4,6 +4,7 @@ class MeasurementsController < ApplicationController
     end
    
     def index
+        @measurements = @observation.measurements
     end
 
     private
