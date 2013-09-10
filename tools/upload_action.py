@@ -152,7 +152,6 @@ def main(args):
     r = requests.post('http://localhost:3000/observations',
             headers=headers,
             data=json.dumps(data),
-            auth=(user_details['username'], user_details['password']),
             )
     if r.ok:
         logger.info('Uploaded successfully')
