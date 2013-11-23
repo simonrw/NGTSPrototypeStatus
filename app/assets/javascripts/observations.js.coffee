@@ -31,6 +31,8 @@ plot_dataset = (plot_data, elem, x, y, xlabel, ylabel) ->
                 [ item[x], item[y] ]
             animation: false
         }]
+        credits:
+            enabled: false
     }
 
 object_url = (id) ->
